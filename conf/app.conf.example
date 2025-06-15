@@ -1,0 +1,23 @@
+appname = gohumanloop-wework
+httpport = 8080
+runmode = dev
+autorender = false
+copyrequestbody = true
+EnableDocs = true
+sqlconn = 
+
+# wework
+agentid = 1000003
+corpsecret = DPs0LAgVQzaQM9OhNQRmvaN2eeYqlfJlScMRWYyRrxY
+corpid = wwfb9fc76f89b0070b
+ptoken = YZXxGRAii4o2hdU9G5c6v7
+pkey = yEffDMYVX3L3NVLooTBXeJJNcfm7pwvQjaa8sfKC8oL
+
+# template
+approve_template_id = 8TmoaR5xEaZsuzKyRT4Zt82FLYCYXVN5EVk6R
+info_template_id = 3WN63LowuwFRsDXft1GbiQi4NrYyLApeejYCBs3S
+creator_userid = ChenFuDong
+approver_userid = ChenFuDong
+
+# database
+datapath = ./data/gohumanloop.db
