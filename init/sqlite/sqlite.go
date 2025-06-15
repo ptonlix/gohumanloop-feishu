@@ -19,7 +19,7 @@ func init() {
 
 	orm.RegisterDataBase("default", "sqlite3", datapath)
 	orm.RegisterModel(new(models.HumanLoop))
-	// orm.RunSyncdb("default", true, true) # 第二个参数是控制强制建库
+	orm.RunSyncdb("default", false, true) //第二个参数是控制强制建库
 
 	Mydb = orm.NewOrm()
 

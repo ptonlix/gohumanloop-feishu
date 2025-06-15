@@ -30,6 +30,7 @@ define packconfig
 	mkdir $(PROJECT_NAME)
 	mkdir $(PROJECT_NAME)/conf
 	mkdir $(PROJECT_NAME)/log
+	mkdir $(PROJECT_NAME)/data
 	mv $(BINARY_NAME) ./$(PROJECT_NAME)/
 	cp $(CONFPATH) $(PROJECT_NAME)/conf/
 	cp -r $(SHPATH) $(PROJECT_NAME)/
