@@ -39,8 +39,26 @@ func (s *GoHumanloopService) GetHumanLoopByRequestId(conversationId, requestId, 
 	return hl, err
 }
 
+func (s *GoHumanloopService) GetHumanLoopByBySpNo(spNo string) (*models.HumanLoop, error) {
+	hl := &models.HumanLoop{SpNo: spNo}
+	err := s.ormer.Read(hl, "SpNo")
+	return hl, err
+}
+
 // UpdateHumanLoop 更新人机协作记录
 func (s *GoHumanloopService) UpdateHumanLoop(hl *models.HumanLoop) (int64, error) {
+	return s.ormer.Update(hl)
+}
+
+func (s *GoHumanloopService) UpdateHumanLoopStatusBySpNo(spNo, status, response, respondedBy string) (int64, error) {
+	hl, err := s.GetHumanLoopByBySpNo(spNo)
+	if err != nil {
+		return 0, err
+	}
+	hl.Status = status
+	hl.Response = response
+	hl.RespondedBy = respondedBy
+	hl.RespondedAt = time.Now()
 	return s.ormer.Update(hl)
 }
 

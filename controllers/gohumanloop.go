@@ -19,10 +19,24 @@ func (c *GoHumanLoopController) Request() {
 	json.Unmarshal(c.Ctx.Input.RequestBody, &ob)
 	logs.Info("incoming message: %s\n", ob)
 
+	// 发送给服务处理
+	spNo, err := services.GHLWeWorkService.HumanLoopRequestOA(ob)
+	if err != nil {
+		logs.Error("HumanLoopRequestOA failed: %v", err)
+		c.Data["json"] = models.APIResponse{
+			Success: false,
+			Error:   err.Error(),
+		}
+		c.ServeJSON()
+		return
+	}
+	logs.Info("CreateHumanLoop spNo: %v", spNo)
+
 	hl := &models.HumanLoop{
 		TaskId:         ob.TaskId,
 		RequestId:      ob.RequestId,
 		ConversationId: ob.ConversationId,
+		SpNo:           spNo,
 		LoopType:       ob.LoopType,
 		ContextMap:     ob.Context,
 		Platform:       ob.Platform,
@@ -42,8 +56,6 @@ func (c *GoHumanLoopController) Request() {
 		c.ServeJSON()
 		return
 	}
-
-	// 发送给服务处理
 	logs.Info("CreateHumanLoop success: %v", id)
 
 	// 响应
@@ -92,6 +104,15 @@ func (c *GoHumanLoopController) Status() {
 func (c *GoHumanLoopController) Continue() {
 	var ob models.HumanLoopContinueData
 	json.Unmarshal(c.Ctx.Input.RequestBody, &ob)
+
+	//TODO 对话模式暂不支持
+	logs.Error("ContinueHumanLoop not supported")
+	c.Data["json"] = models.APIResponse{
+		Success: false,
+		Error:   "ContinueHumanLoop not supported",
+	}
+	c.ServeJSON()
+	return
 
 	hl := &models.HumanLoop{
 		TaskId:         ob.TaskId,

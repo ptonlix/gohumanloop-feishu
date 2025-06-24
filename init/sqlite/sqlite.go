@@ -17,8 +17,9 @@ func init() {
 		panic("数据库路径配置加载失败: datapath 不能为空")
 	}
 
-	orm.RegisterDataBase("default", "sqlite3", datapath)
-	orm.RegisterModel(new(models.HumanLoop))
+	orm.RegisterDriver("sqlite", orm.DRSqlite)
+	orm.RegisterDataBase("default", "sqlite", datapath)
+	orm.RegisterModel(new(models.HumanLoop), new(models.APIKey))
 	orm.RunSyncdb("default", false, true) //第二个参数是控制强制建库
 
 	Mydb = orm.NewOrm()

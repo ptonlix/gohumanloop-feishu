@@ -8,7 +8,7 @@ PROJECT_NAME=GoHumanLoopWeWork
 BINARY_NAME=gohumanloop-wework
 BINARY_UNIX=$(BINARY_NAME)_unix
 CONFPATH=./conf/app.conf
-SHPATH=./run_go-deepread.sh
+SHPATH=./run.sh
 
 APP_NAME=${BINARY_NAME}
 APP_VERSION= v0.1.0

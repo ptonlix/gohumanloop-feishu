@@ -5,7 +5,7 @@ import (
 )
 
 const (
-	HumanLoopTypeApprove      = "approve"
+	HumanLoopTypeApprove      = "approval"
 	HumanLoopTypeInformation  = "information"
 	HumanLoopTypeConversation = "conversation"
 )
@@ -28,12 +28,6 @@ const (
 	// 已取消状态
 	HumanLoopStatusCancelled = "cancelled"
 )
-
-// APIResponse 基础 API 响应模型
-type APIResponse struct {
-	Success bool   `json:"success"`         // 请求是否成功
-	Error   string `json:"error,omitempty"` // 错误信息（可选）
-}
 
 // HumanLoopRequestData 人机协作请求数据
 type HumanLoopRequestData struct {

@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/beego/beego/v2/client/orm"
-	_ "github.com/mattn/go-sqlite3"
+	_ "modernc.org/sqlite"
 )
 
 func init() {
@@ -19,6 +19,7 @@ type HumanLoop struct {
 	TaskId         string    `orm:"size(128);index" json:"task_id"`
 	ConversationId string    `orm:"size(128);index" json:"conversation_id"`
 	RequestId      string    `orm:"size(128);unique" json:"request_id"`
+	SpNo           string    `orm:"size(128);index" json:"sp_no"`
 	LoopType       string    `orm:"size(64)" json:"loop_type"`
 	Context        string    `orm:"type(text)" json:"-"` // 实际存储
 	Platform       string    `orm:"size(64);index" json:"platform"`
@@ -59,4 +60,20 @@ func (h *HumanLoop) BeforeSave() {
 // TableName 设置表名
 func (h *HumanLoop) TableName() string {
 	return "human_loops"
+}
+
+type APIKey struct {
+	ID        int64     `orm:"auto;pk;column(id)" json:"id"`
+	Name      string    `orm:"size(128);unique" json:"name"`
+	Key       string    `orm:"size(128);unique" json:"key"`
+	Status    bool      `orm:"default(true)" json:"status"`
+	Created   time.Time `orm:"auto_now_add;type(datetime)" json:"created_at"`
+	Updated   time.Time `orm:"auto_now;type(datetime)" json:"updated_at"`
+	DeletedAt time.Time `orm:"null;type(datetime)" json:"-"` // 软删除字段
+	IsDeleted bool      `orm:"default(false)" json:"-"`      // 是否已删除标记
+}
+
+// TableName 设置表名
+func (k *APIKey) TableName() string {
+	return "api_keys"
 }
