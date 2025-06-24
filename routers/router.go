@@ -12,6 +12,7 @@ import (
 	beego "github.com/beego/beego/v2/server/web"
 	"github.com/beego/beego/v2/server/web/context"
 	"github.com/ptonlix/gohumanloop-wework/controllers"
+	"github.com/ptonlix/gohumanloop-wework/models"
 	"github.com/ptonlix/gohumanloop-wework/services"
 )
 
@@ -28,13 +29,13 @@ func BearerTokenAuth(ctx *context.Context) {
 	apiKey, err := services.APIKeyDataService.GetAPIKeyByKey(token)
 	if err != nil {
 		ctx.Output.SetStatus(401)
-		ctx.Output.JSON(map[string]string{"error": "Unauthorized"}, false, false)
+		ctx.Output.JSON(models.APIResponse{Success: false, Error: "Unauthorized"}, false, false)
 		return
 	}
 	// 检查是否有效
 	if apiKey.Status != true {
 		ctx.Output.SetStatus(401)
-		ctx.Output.JSON(map[string]string{"error": "Unauthorized"}, false, false)
+		ctx.Output.JSON(models.APIResponse{Success: false, Error: "Unauthorized"}, false, false)
 		return
 	}
 }
@@ -42,7 +43,7 @@ func BearerTokenAuth(ctx *context.Context) {
 func init() {
 	drc := &controllers.WeWorkController{}
 	hl, _ := drc.NewHttpHandler()
-	beego.Handler("/gohumanloop", hl)
+	beego.Handler("/gohumanloop/callback", hl)
 
 	nsGoHumanLoop := beego.NewNamespace("/api/v1",
 		beego.NSNamespace("/humanloop",
