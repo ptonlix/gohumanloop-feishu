@@ -205,11 +205,11 @@ go run main.go
 http://127.0.0.1:9800/docs
 ```
 
-## 🤝 Contributing
+## 🤝 参与贡献
 
-GoHumanLoop Wework 和文档均开源，我们欢迎以问题、文档和 PR 等形式做出贡献。有关更多详细信息，请参阅[CONTRIBUTING.md](./CONTRIBUTING.md)
+GoHumanLoop Wework 和文档均开源，我们欢迎以问题、文档和 PR 等形式做出贡献。
 
-## 📱 Contact
+## 📱 联系方式
 
 <img height=300 src="http://cdn.oyster-iot.cloud/202505231802103.png"/>
 
@@ -217,4 +217,4 @@ GoHumanLoop Wework 和文档均开源，我们欢迎以问题、文档和 PR 等
 
 ## 🌟 Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=gohumanloop-wework/gohumanloop-wework&type=Date)](https://www.star-history.com/#gohumanloop-wework&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=gohumanloop-wework&type=Date)](https://www.star-history.com/#gohumanloop-wework&Date)
