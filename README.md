@@ -35,7 +35,7 @@
 
 ```yaml
 appname = gohumanloop-wework
-httpport = 8080 # HTTP 端口按需配置
+httpport = 9800 # HTTP 端口按需配置
 
 # wework
 agentid = 1000003 # 企业微信应用ID
@@ -145,7 +145,7 @@ docker run -d \
   --name gohumanloop-wework \
   -v /path/to/local/conf:/app/conf \
   -v /path/to/local/data:/app/data \
-  -p 8080:8080 \
+  -p 9800:9800 \
   ptonlix/gohumanloop-wework:latest
 ```
 

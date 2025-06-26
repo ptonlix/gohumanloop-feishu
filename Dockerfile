@@ -2,9 +2,9 @@ FROM golang:alpine AS builder
 
 LABEL stage=gobuilder
 
-ENV CGO_ENABLED 0
-ENV GOOS linux
-ENV GOPROXY https://goproxy.cn,direct
+ENV CGO_ENABLED=0
+ENV GOOS=linux
+ENV GOPROXY=https://goproxy.cn,direct
 
 WORKDIR /build/gohumanloop-wework
 
@@ -20,7 +20,7 @@ FROM alpine
 RUN echo http://mirrors.aliyun.com/alpine/v3.10/main/ > /etc/apk/repositories && \
     echo http://mirrors.aliyun.com/alpine/v3.10/community/ >> /etc/apk/repositories
 RUN apk update --no-cache && apk add --no-cache ca-certificates tzdata
-ENV TZ Asia/Shanghai
+ENV TZ=Asia/Shanghai
 
 WORKDIR /app
 
