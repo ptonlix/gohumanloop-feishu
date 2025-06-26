@@ -15,8 +15,6 @@
 > - `Flexible workflows`: Combines automated reasoning with human oversight for reliable AI operations.
 >
 > Ensures responsible AI deployment by bridging autonomous agents and human judgment.
->
-> Ensures responsible AI deployment by bridging autonomous agents and human judgment.
 
 ## 💻 项目部署
 
@@ -32,6 +30,8 @@
 > 6. 用户需要将`审批模板ID`、`信息模板ID`、`创建人ID`、`审批人ID`配置到 GoHumanLoop 中
 
 ### 配置文件
+
+- 项目配置样例文件在`conf/app.conf.example`中
 
 ```yaml
 appname = gohumanloop-wework
@@ -52,6 +52,12 @@ approver_userid = ChenFuDong # 审批人ID (默认审批人，实际可通过 Go
 
 # database
 datapath = ./data/gohumanloop.db # 数据库路径
+```
+
+- 修改配置文件
+
+```
+mv conf/app.conf.example conf/app.conf
 ```
 
 ### 企业微信审批模板
