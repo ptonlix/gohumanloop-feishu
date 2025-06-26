@@ -1,0 +1,459 @@
+basePath: /api/v1
+definitions:
+  models.APIKey:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      key:
+        type: string
+      name:
+        type: string
+      status:
+        type: boolean
+      updated_at:
+        type: string
+    type: object
+  models.APIKeyListResponse:
+    properties:
+      api_keys:
+        items:
+          $ref: '#/definitions/models.APIKey'
+        type: array
+      error:
+        description: 错误信息（可选）
+        type: string
+      success:
+        description: 请求是否成功
+        type: boolean
+    type: object
+  models.APIKeyRequestData:
+    properties:
+      agentid:
+        description: 企业微信应用ID
+        type: string
+      corpsecret:
+        description: 企业微信应用密钥
+        type: string
+      name:
+        description: 密钥名称
+        type: string
+    type: object
+  models.APIKeyResponseData:
+    properties:
+      created_at:
+        type: string
+      error:
+        description: 错误信息（可选）
+        type: string
+      id:
+        type: integer
+      key:
+        type: string
+      name:
+        type: string
+      status:
+        type: boolean
+      success:
+        description: 请求是否成功
+        type: boolean
+      updated_at:
+        type: string
+    type: object
+  models.APIResponse:
+    properties:
+      error:
+        description: 错误信息（可选）
+        type: string
+      success:
+        description: 请求是否成功
+        type: boolean
+    type: object
+  models.HumanLoopCancelConversationData:
+    properties:
+      conversation_id:
+        description: 会话标识符
+        type: string
+      platform:
+        description: 使用平台
+        type: string
+    type: object
+  models.HumanLoopCancelData:
+    properties:
+      conversation_id:
+        description: 会话标识符
+        type: string
+      platform:
+        description: 使用平台
+        type: string
+      request_id:
+        description: 请求标识符
+        type: string
+    type: object
+  models.HumanLoopContinueData:
+    properties:
+      context:
+        additionalProperties: {}
+        description: 上下文信息
+        type: object
+      conversation_id:
+        description: 会话标识符
+        type: string
+      metadata:
+        additionalProperties: {}
+        description: 附加元数据（可选）
+        type: object
+      platform:
+        description: 使用平台
+        type: string
+      request_id:
+        description: 请求标识符
+        type: string
+      task_id:
+        description: 任务标识符
+        type: string
+    type: object
+  models.HumanLoopRequestData:
+    properties:
+      context:
+        additionalProperties: {}
+        description: 提供给人类的上下文信息
+        type: object
+      conversation_id:
+        description: 会话标识符
+        type: string
+      loop_type:
+        description: 循环类型
+        type: string
+      metadata:
+        additionalProperties: {}
+        description: 附加元数据（可选）
+        type: object
+      platform:
+        description: 使用平台（如微信、飞书）
+        type: string
+      request_id:
+        description: 请求标识符
+        type: string
+      task_id:
+        description: 任务标识符
+        type: string
+    type: object
+  models.HumanLoopStatusResponse:
+    properties:
+      error:
+        description: 错误信息（可选）
+        type: string
+      feedback:
+        description: 反馈数据（可选）
+      responded_at:
+        description: 响应时间戳（可选）
+        type: string
+      responded_by:
+        description: 响应者信息（可选）
+        type: string
+      response:
+        description: 人类响应数据（可选）
+      status:
+        description: 请求状态（默认："pending"）
+        type: string
+      success:
+        description: 请求是否成功
+        type: boolean
+    type: object
+host: 127.0.0.1:9800
+info:
+  contact:
+    email: baird0917@163.com
+    name: Baird
+    url: https://github.com/ptonlix/gohumanloop-wework
+  description: 针对GoHumanLoop在企业微信场景下进行审批、获取信息操作的示例服务。方便用户在使用`GohumanLoop`时，对接到自己的企业微信环境中。
+  license:
+    name: MIT
+    url: https://github.com/ptonlix/gohumanloop-wework/blob/main/LICENSE
+  termsOfService: http://swagger.io/terms/
+  title: GoHumanLoop-Wework
+  version: v0.1.0
+paths:
+  /api/v1/humanloop/continue:
+    post:
+      description: Continue a HumanLoop conversation (not supported)
+      parameters:
+      - description: body for continuing HumanLoop
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.HumanLoopContinueData'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.APIResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.APIResponse'
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - HumanLoop
+  /api/v1/humanloop/request:
+    post:
+      description: Create a new HumanLoop request
+      parameters:
+      - description: body for HumanLoop request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.HumanLoopRequestData'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.APIResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.APIResponse'
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - HumanLoop
+  /api/v1/humanloop/status:
+    get:
+      description: Get the status of a HumanLoop request
+      parameters:
+      - description: Conversation ID
+        in: query
+        name: conversation_id
+        required: true
+        type: string
+      - description: Request ID
+        in: query
+        name: request_id
+        required: true
+        type: string
+      - description: Platform
+        in: query
+        name: platform
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.HumanLoopStatusResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.APIResponse'
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - HumanLoop
+  /apikey/create:
+    post:
+      description: Create a new API Key
+      parameters:
+      - description: API Key creation data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.APIKeyRequestData'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.APIKeyResponseData'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.APIResponse'
+      tags:
+      - APIKey
+  /apikey/delete:
+    post:
+      description: Delete an API Key
+      parameters:
+      - description: API Key to delete
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.APIKey'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.APIResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.APIResponse'
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - APIKey
+  /apikey/disable:
+    post:
+      description: Disable an enabled API Key
+      parameters:
+      - description: API Key to disable
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.APIKey'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.APIResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.APIResponse'
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - APIKey
+  /apikey/enable:
+    post:
+      description: Enable a disabled API Key
+      parameters:
+      - description: API Key to enable
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.APIKey'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.APIResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.APIResponse'
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - APIKey
+  /apikey/get:
+    get:
+      description: Get API Key details by actual key value
+      parameters:
+      - description: The API key value
+        in: query
+        name: key
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.APIKeyResponseData'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.APIResponse'
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - APIKey
+  /apikey/list:
+    get:
+      description: Get all API Keys
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.APIKeyListResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.APIResponse'
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - APIKey
+  /apikey/update:
+    post:
+      description: Update an existing API Key
+      parameters:
+      - description: API Key update data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.APIKey'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.APIResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.APIResponse'
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - APIKey
+  /humanloop/cancel:
+    post:
+      description: Cancel a specific HumanLoop request
+      parameters:
+      - description: body for canceling HumanLoop
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.HumanLoopCancelData'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.APIResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.APIResponse'
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - HumanLoop
+  /humanloop/cancel_conversation:
+    post:
+      description: Cancel all HumanLoop requests in a conversation
+      parameters:
+      - description: body for canceling conversation
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.HumanLoopCancelConversationData'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.APIResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.APIResponse'
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - HumanLoop
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

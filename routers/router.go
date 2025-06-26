@@ -1,10 +1,8 @@
-// @APIVersion 1.0.0
-// @Title beego Test API
-// @Description beego has a very cool tools to autogenerate documents for your API
-// @Contact astaxie@gmail.com
-// @TermsOfServiceUrl http://beego.me/
-// @License Apache 2.0
-// @LicenseUrl http://www.apache.org/licenses/LICENSE-2.0.html
+// @APIVersion 0.1.0
+// @Title GoHumanLoop-Wework
+// @Description 是针对GoHumanLoop在企业微信场景下进行审批、获取信息操作的示例服务。方便用户在使用`GohumanLoop`时，对接到自己的企业微信环境中。
+// @Contact baird0917@163.com
+// @License MIT
 package routers
 
 import (
@@ -21,7 +19,7 @@ func BearerTokenAuth(ctx *context.Context) {
 	logs.Info("authHeader: %v", authHeader)
 	if authHeader == "" || len(authHeader) < 7 || authHeader[:7] != "Bearer " {
 		ctx.Output.SetStatus(401)
-		ctx.Output.JSON(map[string]string{"error": "Unauthorized"}, false, false)
+		ctx.Output.JSON(models.APIResponse{Success: false, Error: "Unauthorized"}, false, false)
 		return
 	}
 	token := authHeader[7:]
@@ -46,8 +44,13 @@ func init() {
 	beego.Handler("/gohumanloop/callback", hl)
 
 	nsGoHumanLoop := beego.NewNamespace("/api/v1",
+		beego.NSBefore(func(ctx *context.Context) {
+			if ctx.Input.URL() == "/api/v1/apikey/create" {
+				return // 跳过认证
+			}
+			BearerTokenAuth(ctx) // 其他路由执行认证
+		}),
 		beego.NSNamespace("/humanloop",
-			beego.NSBefore(BearerTokenAuth),
 			beego.NSCtrlPost("/request", (*controllers.GoHumanLoopController).Request),
 			beego.NSCtrlGet("/status", (*controllers.GoHumanLoopController).Status),
 			beego.NSCtrlPost("/continue", (*controllers.GoHumanLoopController).Continue),
@@ -55,17 +58,16 @@ func init() {
 			beego.NSCtrlPost("/cancel_converstation", (*controllers.GoHumanLoopController).CancelConversation),
 		),
 		beego.NSNamespace("/apikey",
-			beego.NSBefore(BearerTokenAuth),
+
+			beego.NSCtrlPost("/create", (*controllers.APIKeyController).CreateKey),
 			beego.NSCtrlGet("/get", (*controllers.APIKeyController).GetAPIKeyByKey),
 			beego.NSCtrlPost("/update", (*controllers.APIKeyController).UpdateKey),
 			beego.NSCtrlPost("/delete", (*controllers.APIKeyController).DeleteKey),
 			beego.NSCtrlGet("/list", (*controllers.APIKeyController).ListKeys),
+			beego.NSCtrlPut("/enable", (*controllers.APIKeyController).EnableKey),
+			beego.NSCtrlPut("/disable", (*controllers.APIKeyController).DisableKey),
 		),
 	)
 
-	nsNoAuth := beego.NewNamespace("/api/v1",
-		beego.NSCtrlPost("/create_apikey", (*controllers.APIKeyController).CreateKey),
-	)
-
-	beego.AddNamespace(nsGoHumanLoop, nsNoAuth)
+	beego.AddNamespace(nsGoHumanLoop)
 }

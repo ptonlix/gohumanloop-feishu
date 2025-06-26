@@ -2,7 +2,6 @@
 
 <div align="center">
 	<img height=160 src="http://cdn.oyster-iot.cloud/企业微信-copy.png"><br>
-    <b face="雅黑">审批模板</b>
 </div>
 
 **GoHumanLoop WeWork** 是针对`GoHumanLoop`在企业微信场景下进行审批、获取信息操作的示例服务。方便用户在使用`GohumanLoop`时，对接到自己的企业微信环境中。
@@ -19,9 +18,7 @@
 >
 > Ensures responsible AI deployment by bridging autonomous agents and human judgment.
 
-## 项目部署
-
-GoHumanLoop Wework 支持两种部署方式
+## 💻 项目部署
 
 > [!IMPORTANT]
 > 需要用户提前准备好企业微信和企业微信应用
@@ -66,7 +63,16 @@ datapath = ./data/gohumanloop.db # 数据库路径
     <b face="雅黑">审批模板</b>
 </div>
 
-- 参考图片内的字段，都是文本控件和多行文本控件
+- 参考图片内的字段，都是文本控件和多行文本控件。包括以下字段
+  1. 任务 ID
+  2. 对话 ID
+  3. 请求 ID
+  4. HumanLoop 类型
+  5. 申请内容
+  6. 申请问题
+  7. 申请说明
+
+以上字段由 GoHumanLoop 库来传输并自动填充并自动发起审批流程
 
 <div align="center">
 	<img height=240 src="http://cdn.oyster-iot.cloud/202506241756802.png"><br>
@@ -80,7 +86,7 @@ datapath = ./data/gohumanloop.db # 数据库路径
     <b face="雅黑">信息获取模板</b>
 </div>
 
-- 参考图片内的字段，都是文本控件和多行文本控件
+- 参考图片内的字段，都是文本控件和多行文本控件。详情同审批流程模板和说明
 
 <div align="center">
 	<img height=240 src="http://cdn.oyster-iot.cloud/202506242226055.png"><br>
@@ -91,10 +97,118 @@ datapath = ./data/gohumanloop.db # 数据库路径
 
 ### 部署方式
 
-GoHumanLoop Wework 支持两种部署方式
+GoHumanLoop Wework 支持两种部署方式手动部署和 Docker 部署。
 
-#### 1. 本地部署
+> [!WARNING]
+> 这两种方式均需要有企业微信同一注册主体下的服务器。服务器和域名需要已备案，开启 API 接收消息时也需要域名验证是否是同一注册主体下
+
+#### 1. 手动部署
+
+Go 版本要求：1.23.0
+
+- 下载代码
+
+```shell
+git clone https://github.com/ptonlix/gohumanloop-wework.git
+```
+
+- 编译
+
+```shell
+make build
+```
+
+## 运行
+
+```
+./gohumanloop-wework
+```
 
 #### 2. Docker 部署
 
-## 项目介绍
+- 提前安装好 Docker 服务
+
+```
+docker pull ptonlix/gohumanloop-wework:latest
+```
+
+- 运行容器
+
+```
+docker run -d \
+  --name gohumanloop-wework \
+  -v /path/to/local/conf:/app/conf \
+  -v /path/to/local/data:/app/data \
+  -p 8080:8080 \
+  ptonlix/gohumanloop-wework:latest
+```
+
+#### 配置反向代理
+
+以 Nginx 为例，可以参考在 Nginx 配置文件中添加以下路由配置
+
+```shell
+location ^~ /humanloop/ {
+        proxy_pass http://127.0.0.1:9800/gohumanloop/callback;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Real-Port $remote_port;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+}
+
+location ^~ /api/v1/humanloop/ {
+        proxy_pass http://127.0.0.1:9800;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Real-Port $remote_port;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+}
+
+location ^~ /api/v1/apikey/ {
+        proxy_pass http://127.0.0.1:9800;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Real-Port $remote_port;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+}
+```
+
+## 📖 项目介绍
+
+### 架构设计
+
+<div align="center">
+	<img height=240 src="http://cdn.oyster-iot.cloud/202506252306729.png"><br>
+    <b face="雅黑">GoHumanLoop与Gohumanloop-Wework架构关系</b>
+</div>
+
+- `GoHumanLoop`提供了一套统一的 API 接口，通过`API Provider`对外提供。
+- `gohumanloop-wework`实现了`API Consumer`的功能，通过`API Provider`来获取审批相关的信息，并且通过企业微信 WeWork API 实现了与用户的企业微信应用进行交互，发送审批请求和获取审批事件回调等。
+
+### 实现介绍
+
+`gohumanloop-wework`采用[Beego](https://github.com/beego/beego)作为 Web 框架。`sqlite`作为简单的数据存储。[go-workwx](https://github.com/xen0n/go-workwx)作为企业微信 API 实现。提供一个可拓展的 GoHumanLoop 企业微信审批示例服务。
+
+- 访问 Swagger 文档:
+
+```
+go run main.go
+```
+
+```
+http://127.0.0.1:9800/docs
+```
+
+## 🤝 Contributing
+
+GoHumanLoop Wework 和文档均开源，我们欢迎以问题、文档和 PR 等形式做出贡献。有关更多详细信息，请参阅[CONTRIBUTING.md](./CONTRIBUTING.md)
+
+## 📱 Contact
+
+<img height=300 src="http://cdn.oyster-iot.cloud/202505231802103.png"/>
+
+🎉 如果你对本项目感兴趣，欢迎扫码联系作者交流
+
+## 🌟 Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=gohumanloop/gohumanloop&type=Date)](https://www.star-history.com/#gohumanloop/gohumanloop&Date)

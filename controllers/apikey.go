@@ -11,10 +11,18 @@ import (
 	"github.com/ptonlix/gohumanloop-wework/services"
 )
 
+// APIKeyController operations for API Keys
 type APIKeyController struct {
 	beego.Controller
 }
 
+// @Title Create API Key
+// @Description Create a new API Key
+// @Tags APIKey
+// @Param	body		body 	models.APIKeyRequestData	true		"API Key creation data"
+// @Success 200 {object} models.APIKeyResponseData
+// @Failure 400 {object} models.APIResponse
+// @router /apikey/create [post]
 func (c *APIKeyController) CreateKey() {
 	var ak models.APIKeyRequestData
 	json.Unmarshal(c.Ctx.Input.RequestBody, &ak)
@@ -35,7 +43,7 @@ func (c *APIKeyController) CreateKey() {
 	if err != nil {
 		c.Data["json"] = models.APIResponse{
 			Success: false,
-			Error:   "生成API Key失败",
+			Error:   "生成API Key失败:" + err.Error(),
 		}
 		c.ServeJSON()
 		return
@@ -80,6 +88,15 @@ func (c *APIKeyController) GetAPIKeyByID() {
 	}
 	c.ServeJSON()
 }
+
+// @Title Get API Key By Key
+// @Description Get API Key details by actual key value
+// @Tags APIKey
+// @Param	key		query 	string	true		"The API key value"
+// @Security ApiKeyAuth
+// @Success 200 {object} models.APIKeyResponseData
+// @Failure 400 {object} models.APIResponse
+// @router /apikey/get [get]
 func (c *APIKeyController) GetAPIKeyByKey() {
 	key := c.GetString("key")
 	apiKey, err := services.APIKeyDataService.GetAPIKeyByKey(key)
@@ -101,6 +118,14 @@ func (c *APIKeyController) GetAPIKeyByKey() {
 	c.ServeJSON()
 }
 
+// @Title Update API Key
+// @Description Update an existing API Key
+// @Tags APIKey
+// @Param	body		body 	models.APIKey	true		"API Key update data"
+// @Security ApiKeyAuth
+// @Success 200 {object} models.APIResponse
+// @Failure 400 {object} models.APIResponse
+// @router /apikey/update [post]
 func (c *APIKeyController) UpdateKey() {
 	var ak models.APIKey
 	json.Unmarshal(c.Ctx.Input.RequestBody, &ak)
@@ -121,6 +146,14 @@ func (c *APIKeyController) UpdateKey() {
 	c.ServeJSON()
 }
 
+// @Title Delete API Key
+// @Description Delete an API Key
+// @Tags APIKey
+// @Param	body		body 	models.APIKey	true		"API Key to delete"
+// @Security ApiKeyAuth
+// @Success 200 {object} models.APIResponse
+// @Failure 400 {object} models.APIResponse
+// @router /apikey/delete [post]
 func (c *APIKeyController) DeleteKey() {
 	var ak models.APIKey
 	json.Unmarshal(c.Ctx.Input.RequestBody, &ak)
@@ -143,6 +176,13 @@ func (c *APIKeyController) DeleteKey() {
 	c.ServeJSON()
 }
 
+// @Title List API Keys
+// @Description Get all API Keys
+// @Tags APIKey
+// @Security ApiKeyAuth
+// @Success 200 {object} models.APIKeyListResponse
+// @Failure 400 {object} models.APIResponse
+// @router /apikey/list  [get]
 func (c *APIKeyController) ListKeys() {
 	apiKeys, err := services.APIKeyDataService.ListAPIKeys()
 	if err != nil {
@@ -163,9 +203,19 @@ func (c *APIKeyController) ListKeys() {
 	c.ServeJSON()
 }
 
+// @Title Enable API Key
+// @Description Enable a disabled API Key
+// @Tags APIKey
+// @Param	body		body 	models.APIKey	true		"API Key to enable"
+// @Security ApiKeyAuth
+// @Success 200 {object} models.APIResponse
+// @Failure 400 {object} models.APIResponse
+// @router /apikey/enable [post]
 func (c *APIKeyController) EnableKey() {
-	id, _ := c.GetInt64("id")
-	err := services.APIKeyDataService.EnableAPIKey(id)
+	var ak models.APIKey
+	json.Unmarshal(c.Ctx.Input.RequestBody, &ak)
+
+	err := services.APIKeyDataService.EnableAPIKey(ak.ID)
 	if err != nil {
 		c.Data["json"] = models.APIResponse{
 			Success: false,
@@ -181,9 +231,19 @@ func (c *APIKeyController) EnableKey() {
 	c.ServeJSON()
 }
 
+// @Title Disable API Key
+// @Description Disable an enabled API Key
+// @Tags APIKey
+// @Param	body		body 	models.APIKey	true		"API Key to disable"
+// @Security ApiKeyAuth
+// @Success 200 {object} models.APIResponse
+// @Failure 400 {object} models.APIResponse
+// @router /apikey/disable [post]
 func (c *APIKeyController) DisableKey() {
-	id, _ := c.GetInt64("id")
-	err := services.APIKeyDataService.DisableAPIKey(id)
+	var ak models.APIKey
+	json.Unmarshal(c.Ctx.Input.RequestBody, &ak)
+
+	err := services.APIKeyDataService.DisableAPIKey(ak.ID)
 	if err != nil {
 		c.Data["json"] = models.APIResponse{
 			Success: false,

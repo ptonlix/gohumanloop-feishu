@@ -14,6 +14,14 @@ type GoHumanLoopController struct {
 	beego.Controller
 }
 
+// @Title Create HumanLoop Request
+// @Description Create a new HumanLoop request
+// @Tags HumanLoop
+// @Param	body		body 	models.HumanLoopRequestData	true		"body for HumanLoop request"
+// @Security ApiKeyAuth
+// @Success 200 {object} models.APIResponse
+// @Failure 400 {object} models.APIResponse
+// @router /api/v1/humanloop/request [post]
 func (c *GoHumanLoopController) Request() {
 	var ob models.HumanLoopRequestData
 	json.Unmarshal(c.Ctx.Input.RequestBody, &ob)
@@ -65,6 +73,16 @@ func (c *GoHumanLoopController) Request() {
 	c.ServeJSON()
 }
 
+// @Title Get HumanLoop Status
+// @Description Get the status of a HumanLoop request
+// @Tags HumanLoop
+// @Param	conversation_id		query	string	true	"Conversation ID"
+// @Param	request_id		query	string	true	"Request ID"
+// @Param	platform		query	string	true	"Platform"
+// @Security ApiKeyAuth
+// @Success 200 {object} models.HumanLoopStatusResponse
+// @Failure 400 {object} models.APIResponse
+// @router /api/v1/humanloop/status [get]
 func (c *GoHumanLoopController) Status() {
 	conversationId := c.GetString("conversation_id")
 	requestId := c.GetString("request_id")
@@ -101,6 +119,14 @@ func (c *GoHumanLoopController) Status() {
 	c.ServeJSON()
 }
 
+// @Title Continue HumanLoop
+// @Description Continue a HumanLoop conversation (not supported)
+// @Tags HumanLoop
+// @Param	body		body 	models.HumanLoopContinueData	true		"body for continuing HumanLoop"
+// @Security ApiKeyAuth
+// @Success 200 {object} models.APIResponse
+// @Failure 400 {object} models.APIResponse
+// @router /api/v1/humanloop/continue [post]
 func (c *GoHumanLoopController) Continue() {
 	var ob models.HumanLoopContinueData
 	json.Unmarshal(c.Ctx.Input.RequestBody, &ob)
@@ -147,6 +173,14 @@ func (c *GoHumanLoopController) Continue() {
 
 }
 
+// @Title Cancel HumanLoop
+// @Description Cancel a specific HumanLoop request
+// @Tags HumanLoop
+// @Param	body		body 	models.HumanLoopCancelData	true		"body for canceling HumanLoop"
+// @Security ApiKeyAuth
+// @Success 200 {object} models.APIResponse
+// @Failure 400 {object} models.APIResponse
+// @router /humanloop/cancel [post]
 func (c *GoHumanLoopController) Cancel() {
 	var ob models.HumanLoopCancelData
 	json.Unmarshal(c.Ctx.Input.RequestBody, &ob)
@@ -187,6 +221,14 @@ func (c *GoHumanLoopController) Cancel() {
 
 }
 
+// @Title Cancel Conversation
+// @Description Cancel all HumanLoop requests in a conversation
+// @Tags HumanLoop
+// @Param	body		body 	models.HumanLoopCancelConversationData	true		"body for canceling conversation"
+// @Security ApiKeyAuth
+// @Success 200 {object} models.APIResponse
+// @Failure 400 {object} models.APIResponse
+// @router /humanloop/cancel_conversation [post]
 func (c *GoHumanLoopController) CancelConversation() {
 	var ob models.HumanLoopCancelConversationData
 	json.Unmarshal(c.Ctx.Input.RequestBody, &ob)
