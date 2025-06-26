@@ -217,4 +217,4 @@ GoHumanLoop Wework 和文档均开源，我们欢迎以问题、文档和 PR 等
 
 ## 🌟 Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=gohumanloop/gohumanloop&type=Date)](https://www.star-history.com/#gohumanloop/gohumanloop&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=gohumanloop-wework/gohumanloop-wework&type=Date)](https://www.star-history.com/#gohumanloop-wework&Date)
