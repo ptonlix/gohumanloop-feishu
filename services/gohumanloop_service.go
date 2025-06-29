@@ -50,7 +50,7 @@ func (s *GoHumanloopService) UpdateHumanLoop(hl *models.HumanLoop) (int64, error
 	return s.ormer.Update(hl)
 }
 
-func (s *GoHumanloopService) UpdateHumanLoopStatusBySpNo(spNo, status, response, respondedBy string) (int64, error) {
+func (s *GoHumanloopService) UpdateHumanLoopStatusBySpNo(spNo, status, response, respondedBy, feedback string) (int64, error) {
 	hl, err := s.GetHumanLoopByBySpNo(spNo)
 	if err != nil {
 		return 0, err
@@ -59,6 +59,7 @@ func (s *GoHumanloopService) UpdateHumanLoopStatusBySpNo(spNo, status, response,
 	hl.Response = response
 	hl.RespondedBy = respondedBy
 	hl.RespondedAt = time.Now()
+	hl.Feedback = feedback
 	return s.ormer.Update(hl)
 }
 
