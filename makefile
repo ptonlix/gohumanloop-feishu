@@ -11,7 +11,7 @@ CONFPATH=./conf/app.conf
 SHPATH=./run.sh
 
 APP_NAME=${BINARY_NAME}
-APP_VERSION= v0.1.0
+APP_VERSION= v0.1.1
 BUILD_VERSION=$(shell git log -1 --oneline)
 BUILD_TIME=$(shell date )
 GIT_REVISION=$(shell git rev-parse --short HEAD)
