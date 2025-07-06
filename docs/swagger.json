@@ -1,711 +1,687 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "description": "针对GoHumanLoop在企业微信场景下进行审批、获取信息操作的示例服务。方便用户在使用`GohumanLoop`时，对接到自己的企业微信环境中。",
-        "title": "GoHumanLoop-Wework",
-        "termsOfService": "http://swagger.io/terms/",
-        "contact": {
-            "name": "Baird",
-            "url": "https://github.com/ptonlix/gohumanloop-wework",
-            "email": "baird0917@163.com"
-        },
-        "license": {
-            "name": "MIT",
-            "url": "https://github.com/ptonlix/gohumanloop-wework/blob/main/LICENSE"
-        },
-        "version": "v0.1.0"
+  "swagger": "2.0",
+  "info": {
+    "description": "针对GoHumanLoop在企业微信场景下进行审批、获取信息操作的示例服务。方便用户在使用`GohumanLoop`时，对接到自己的企业微信环境中。",
+    "title": "gohumanloop-feishu",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "name": "Baird",
+      "url": "https://github.com/ptonlix/gohumanloop-feishu",
+      "email": "baird0917@163.com"
     },
-    "host": "127.0.0.1:9800",
-    "basePath": "/api/v1",
-    "paths": {
-        "/api/v1/humanloop/continue": {
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "Continue a HumanLoop conversation (not supported)",
-                "tags": [
-                    "HumanLoop"
-                ],
-                "parameters": [
-                    {
-                        "description": "body for continuing HumanLoop",
-                        "name": "body",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.HumanLoopContinueData"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/models.APIResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/models.APIResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/api/v1/humanloop/request": {
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "Create a new HumanLoop request",
-                "tags": [
-                    "HumanLoop"
-                ],
-                "parameters": [
-                    {
-                        "description": "body for HumanLoop request",
-                        "name": "body",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.HumanLoopRequestData"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/models.APIResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/models.APIResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/api/v1/humanloop/status": {
-            "get": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "Get the status of a HumanLoop request",
-                "tags": [
-                    "HumanLoop"
-                ],
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Conversation ID",
-                        "name": "conversation_id",
-                        "in": "query",
-                        "required": true
-                    },
-                    {
-                        "type": "string",
-                        "description": "Request ID",
-                        "name": "request_id",
-                        "in": "query",
-                        "required": true
-                    },
-                    {
-                        "type": "string",
-                        "description": "Platform",
-                        "name": "platform",
-                        "in": "query",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/models.HumanLoopStatusResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/models.APIResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/apikey/create": {
-            "post": {
-                "description": "Create a new API Key",
-                "tags": [
-                    "APIKey"
-                ],
-                "parameters": [
-                    {
-                        "description": "API Key creation data",
-                        "name": "body",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.APIKeyRequestData"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/models.APIKeyResponseData"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/models.APIResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/apikey/delete": {
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "Delete an API Key",
-                "tags": [
-                    "APIKey"
-                ],
-                "parameters": [
-                    {
-                        "description": "API Key to delete",
-                        "name": "body",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.APIKey"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/models.APIResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/models.APIResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/apikey/disable": {
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "Disable an enabled API Key",
-                "tags": [
-                    "APIKey"
-                ],
-                "parameters": [
-                    {
-                        "description": "API Key to disable",
-                        "name": "body",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.APIKey"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/models.APIResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/models.APIResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/apikey/enable": {
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "Enable a disabled API Key",
-                "tags": [
-                    "APIKey"
-                ],
-                "parameters": [
-                    {
-                        "description": "API Key to enable",
-                        "name": "body",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.APIKey"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/models.APIResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/models.APIResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/apikey/get": {
-            "get": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "Get API Key details by actual key value",
-                "tags": [
-                    "APIKey"
-                ],
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "The API key value",
-                        "name": "key",
-                        "in": "query",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/models.APIKeyResponseData"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/models.APIResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/apikey/list": {
-            "get": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "Get all API Keys",
-                "tags": [
-                    "APIKey"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/models.APIKeyListResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/models.APIResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/apikey/update": {
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "Update an existing API Key",
-                "tags": [
-                    "APIKey"
-                ],
-                "parameters": [
-                    {
-                        "description": "API Key update data",
-                        "name": "body",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.APIKey"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/models.APIResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/models.APIResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/humanloop/cancel": {
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "Cancel a specific HumanLoop request",
-                "tags": [
-                    "HumanLoop"
-                ],
-                "parameters": [
-                    {
-                        "description": "body for canceling HumanLoop",
-                        "name": "body",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.HumanLoopCancelData"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/models.APIResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/models.APIResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/humanloop/cancel_conversation": {
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "Cancel all HumanLoop requests in a conversation",
-                "tags": [
-                    "HumanLoop"
-                ],
-                "parameters": [
-                    {
-                        "description": "body for canceling conversation",
-                        "name": "body",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.HumanLoopCancelConversationData"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/models.APIResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/models.APIResponse"
-                        }
-                    }
-                }
-            }
-        }
+    "license": {
+      "name": "MIT",
+      "url": "https://github.com/ptonlix/gohumanloop-feishu/blob/main/LICENSE"
     },
-    "definitions": {
-        "models.APIKey": {
-            "type": "object",
-            "properties": {
-                "created_at": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "key": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "status": {
-                    "type": "boolean"
-                },
-                "updated_at": {
-                    "type": "string"
-                }
+    "version": "v0.1.0"
+  },
+  "host": "127.0.0.1:9800",
+  "basePath": "/api/v1",
+  "paths": {
+    "/api/v1/humanloop/continue": {
+      "post": {
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "description": "Continue a HumanLoop conversation (not supported)",
+        "tags": ["HumanLoop"],
+        "parameters": [
+          {
+            "description": "body for continuing HumanLoop",
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.HumanLoopContinueData"
             }
-        },
-        "models.APIKeyListResponse": {
-            "type": "object",
-            "properties": {
-                "api_keys": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/models.APIKey"
-                    }
-                },
-                "error": {
-                    "description": "错误信息（可选）",
-                    "type": "string"
-                },
-                "success": {
-                    "description": "请求是否成功",
-                    "type": "boolean"
-                }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.APIResponse"
             }
-        },
-        "models.APIKeyRequestData": {
-            "type": "object",
-            "properties": {
-                "agentid": {
-                    "description": "企业微信应用ID",
-                    "type": "string"
-                },
-                "corpsecret": {
-                    "description": "企业微信应用密钥",
-                    "type": "string"
-                },
-                "name": {
-                    "description": "密钥名称",
-                    "type": "string"
-                }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/models.APIResponse"
             }
-        },
-        "models.APIKeyResponseData": {
-            "type": "object",
-            "properties": {
-                "created_at": {
-                    "type": "string"
-                },
-                "error": {
-                    "description": "错误信息（可选）",
-                    "type": "string"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "key": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "status": {
-                    "type": "boolean"
-                },
-                "success": {
-                    "description": "请求是否成功",
-                    "type": "boolean"
-                },
-                "updated_at": {
-                    "type": "string"
-                }
-            }
-        },
-        "models.APIResponse": {
-            "type": "object",
-            "properties": {
-                "error": {
-                    "description": "错误信息（可选）",
-                    "type": "string"
-                },
-                "success": {
-                    "description": "请求是否成功",
-                    "type": "boolean"
-                }
-            }
-        },
-        "models.HumanLoopCancelConversationData": {
-            "type": "object",
-            "properties": {
-                "conversation_id": {
-                    "description": "会话标识符",
-                    "type": "string"
-                },
-                "platform": {
-                    "description": "使用平台",
-                    "type": "string"
-                }
-            }
-        },
-        "models.HumanLoopCancelData": {
-            "type": "object",
-            "properties": {
-                "conversation_id": {
-                    "description": "会话标识符",
-                    "type": "string"
-                },
-                "platform": {
-                    "description": "使用平台",
-                    "type": "string"
-                },
-                "request_id": {
-                    "description": "请求标识符",
-                    "type": "string"
-                }
-            }
-        },
-        "models.HumanLoopContinueData": {
-            "type": "object",
-            "properties": {
-                "context": {
-                    "description": "上下文信息",
-                    "type": "object",
-                    "additionalProperties": {}
-                },
-                "conversation_id": {
-                    "description": "会话标识符",
-                    "type": "string"
-                },
-                "metadata": {
-                    "description": "附加元数据（可选）",
-                    "type": "object",
-                    "additionalProperties": {}
-                },
-                "platform": {
-                    "description": "使用平台",
-                    "type": "string"
-                },
-                "request_id": {
-                    "description": "请求标识符",
-                    "type": "string"
-                },
-                "task_id": {
-                    "description": "任务标识符",
-                    "type": "string"
-                }
-            }
-        },
-        "models.HumanLoopRequestData": {
-            "type": "object",
-            "properties": {
-                "context": {
-                    "description": "提供给人类的上下文信息",
-                    "type": "object",
-                    "additionalProperties": {}
-                },
-                "conversation_id": {
-                    "description": "会话标识符",
-                    "type": "string"
-                },
-                "loop_type": {
-                    "description": "循环类型",
-                    "type": "string"
-                },
-                "metadata": {
-                    "description": "附加元数据（可选）",
-                    "type": "object",
-                    "additionalProperties": {}
-                },
-                "platform": {
-                    "description": "使用平台（如微信、飞书）",
-                    "type": "string"
-                },
-                "request_id": {
-                    "description": "请求标识符",
-                    "type": "string"
-                },
-                "task_id": {
-                    "description": "任务标识符",
-                    "type": "string"
-                }
-            }
-        },
-        "models.HumanLoopStatusResponse": {
-            "type": "object",
-            "properties": {
-                "error": {
-                    "description": "错误信息（可选）",
-                    "type": "string"
-                },
-                "feedback": {
-                    "description": "反馈数据（可选）"
-                },
-                "responded_at": {
-                    "description": "响应时间戳（可选）",
-                    "type": "string"
-                },
-                "responded_by": {
-                    "description": "响应者信息（可选）",
-                    "type": "string"
-                },
-                "response": {
-                    "description": "人类响应数据（可选）"
-                },
-                "status": {
-                    "description": "请求状态（默认：\"pending\"）",
-                    "type": "string"
-                },
-                "success": {
-                    "description": "请求是否成功",
-                    "type": "boolean"
-                }
-            }
+          }
         }
+      }
     },
-    "securityDefinitions": {
-        "ApiKeyAuth": {
-            "type": "apiKey",
-            "name": "Authorization",
-            "in": "header"
+    "/api/v1/humanloop/request": {
+      "post": {
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "description": "Create a new HumanLoop request",
+        "tags": ["HumanLoop"],
+        "parameters": [
+          {
+            "description": "body for HumanLoop request",
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.HumanLoopRequestData"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.APIResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/models.APIResponse"
+            }
+          }
         }
+      }
+    },
+    "/api/v1/humanloop/status": {
+      "get": {
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "description": "Get the status of a HumanLoop request",
+        "tags": ["HumanLoop"],
+        "parameters": [
+          {
+            "type": "string",
+            "description": "Conversation ID",
+            "name": "conversation_id",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "Request ID",
+            "name": "request_id",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "Platform",
+            "name": "platform",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.HumanLoopStatusResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/models.APIResponse"
+            }
+          }
+        }
+      }
+    },
+    "/apikey/create": {
+      "post": {
+        "description": "Create a new API Key",
+        "tags": ["APIKey"],
+        "parameters": [
+          {
+            "description": "API Key creation data",
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.APIKeyRequestData"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.APIKeyResponseData"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/models.APIResponse"
+            }
+          }
+        }
+      }
+    },
+    "/apikey/delete": {
+      "post": {
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "description": "Delete an API Key",
+        "tags": ["APIKey"],
+        "parameters": [
+          {
+            "description": "API Key to delete",
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.APIKey"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.APIResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/models.APIResponse"
+            }
+          }
+        }
+      }
+    },
+    "/apikey/disable": {
+      "post": {
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "description": "Disable an enabled API Key",
+        "tags": ["APIKey"],
+        "parameters": [
+          {
+            "description": "API Key to disable",
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.APIKey"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.APIResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/models.APIResponse"
+            }
+          }
+        }
+      }
+    },
+    "/apikey/enable": {
+      "post": {
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "description": "Enable a disabled API Key",
+        "tags": ["APIKey"],
+        "parameters": [
+          {
+            "description": "API Key to enable",
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.APIKey"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.APIResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/models.APIResponse"
+            }
+          }
+        }
+      }
+    },
+    "/apikey/get": {
+      "get": {
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "description": "Get API Key details by actual key value",
+        "tags": ["APIKey"],
+        "parameters": [
+          {
+            "type": "string",
+            "description": "The API key value",
+            "name": "key",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.APIKeyResponseData"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/models.APIResponse"
+            }
+          }
+        }
+      }
+    },
+    "/apikey/list": {
+      "get": {
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "description": "Get all API Keys",
+        "tags": ["APIKey"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.APIKeyListResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/models.APIResponse"
+            }
+          }
+        }
+      }
+    },
+    "/apikey/update": {
+      "post": {
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "description": "Update an existing API Key",
+        "tags": ["APIKey"],
+        "parameters": [
+          {
+            "description": "API Key update data",
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.APIKey"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.APIResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/models.APIResponse"
+            }
+          }
+        }
+      }
+    },
+    "/humanloop/cancel": {
+      "post": {
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "description": "Cancel a specific HumanLoop request",
+        "tags": ["HumanLoop"],
+        "parameters": [
+          {
+            "description": "body for canceling HumanLoop",
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.HumanLoopCancelData"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.APIResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/models.APIResponse"
+            }
+          }
+        }
+      }
+    },
+    "/humanloop/cancel_conversation": {
+      "post": {
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "description": "Cancel all HumanLoop requests in a conversation",
+        "tags": ["HumanLoop"],
+        "parameters": [
+          {
+            "description": "body for canceling conversation",
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.HumanLoopCancelConversationData"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.APIResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/models.APIResponse"
+            }
+          }
+        }
+      }
     }
+  },
+  "definitions": {
+    "models.APIKey": {
+      "type": "object",
+      "properties": {
+        "created_at": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "key": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "status": {
+          "type": "boolean"
+        },
+        "updated_at": {
+          "type": "string"
+        }
+      }
+    },
+    "models.APIKeyListResponse": {
+      "type": "object",
+      "properties": {
+        "api_keys": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/models.APIKey"
+          }
+        },
+        "error": {
+          "description": "错误信息（可选）",
+          "type": "string"
+        },
+        "success": {
+          "description": "请求是否成功",
+          "type": "boolean"
+        }
+      }
+    },
+    "models.APIKeyRequestData": {
+      "type": "object",
+      "properties": {
+        "agentid": {
+          "description": "企业微信应用ID",
+          "type": "string"
+        },
+        "corpsecret": {
+          "description": "企业微信应用密钥",
+          "type": "string"
+        },
+        "name": {
+          "description": "密钥名称",
+          "type": "string"
+        }
+      }
+    },
+    "models.APIKeyResponseData": {
+      "type": "object",
+      "properties": {
+        "created_at": {
+          "type": "string"
+        },
+        "error": {
+          "description": "错误信息（可选）",
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "key": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "status": {
+          "type": "boolean"
+        },
+        "success": {
+          "description": "请求是否成功",
+          "type": "boolean"
+        },
+        "updated_at": {
+          "type": "string"
+        }
+      }
+    },
+    "models.APIResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "错误信息（可选）",
+          "type": "string"
+        },
+        "success": {
+          "description": "请求是否成功",
+          "type": "boolean"
+        }
+      }
+    },
+    "models.HumanLoopCancelConversationData": {
+      "type": "object",
+      "properties": {
+        "conversation_id": {
+          "description": "会话标识符",
+          "type": "string"
+        },
+        "platform": {
+          "description": "使用平台",
+          "type": "string"
+        }
+      }
+    },
+    "models.HumanLoopCancelData": {
+      "type": "object",
+      "properties": {
+        "conversation_id": {
+          "description": "会话标识符",
+          "type": "string"
+        },
+        "platform": {
+          "description": "使用平台",
+          "type": "string"
+        },
+        "request_id": {
+          "description": "请求标识符",
+          "type": "string"
+        }
+      }
+    },
+    "models.HumanLoopContinueData": {
+      "type": "object",
+      "properties": {
+        "context": {
+          "description": "上下文信息",
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "conversation_id": {
+          "description": "会话标识符",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "附加元数据（可选）",
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "platform": {
+          "description": "使用平台",
+          "type": "string"
+        },
+        "request_id": {
+          "description": "请求标识符",
+          "type": "string"
+        },
+        "task_id": {
+          "description": "任务标识符",
+          "type": "string"
+        }
+      }
+    },
+    "models.HumanLoopRequestData": {
+      "type": "object",
+      "properties": {
+        "context": {
+          "description": "提供给人类的上下文信息",
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "conversation_id": {
+          "description": "会话标识符",
+          "type": "string"
+        },
+        "loop_type": {
+          "description": "循环类型",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "附加元数据（可选）",
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "platform": {
+          "description": "使用平台（如微信、飞书）",
+          "type": "string"
+        },
+        "request_id": {
+          "description": "请求标识符",
+          "type": "string"
+        },
+        "task_id": {
+          "description": "任务标识符",
+          "type": "string"
+        }
+      }
+    },
+    "models.HumanLoopStatusResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "错误信息（可选）",
+          "type": "string"
+        },
+        "feedback": {
+          "description": "反馈数据（可选）"
+        },
+        "responded_at": {
+          "description": "响应时间戳（可选）",
+          "type": "string"
+        },
+        "responded_by": {
+          "description": "响应者信息（可选）",
+          "type": "string"
+        },
+        "response": {
+          "description": "人类响应数据（可选）"
+        },
+        "status": {
+          "description": "请求状态（默认：\"pending\"）",
+          "type": "string"
+        },
+        "success": {
+          "description": "请求是否成功",
+          "type": "boolean"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  }
 }

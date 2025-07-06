@@ -1,4 +1,4 @@
-# 📦 GoHumanLoop WeWork
+# 📦 GoHumanLoop FeiShu
 
 <div align="center">
 	<img height=160 src="http://cdn.oyster-iot.cloud/企业微信-copy.png"><br>
@@ -34,7 +34,7 @@
 - 项目配置样例文件在`conf/app.conf.example`中
 
 ```yaml
-appname = gohumanloop-wework
+appname = gohumanloop-feishu
 httpport = 9800 # HTTP 端口按需配置
 
 # wework
@@ -115,7 +115,7 @@ Go 版本要求：1.23.0
 - 下载代码
 
 ```shell
-git clone https://github.com/ptonlix/gohumanloop-wework.git
+git clone https://github.com/ptonlix/gohumanloop-feishu.git
 ```
 
 - 编译
@@ -127,7 +127,7 @@ make build
 ## 运行
 
 ```
-./gohumanloop-wework
+./gohumanloop-feishu
 ```
 
 #### 2. Docker 部署
@@ -135,18 +135,18 @@ make build
 - 提前安装好 Docker 服务
 
 ```
-docker pull ptonlix/gohumanloop-wework:latest
+docker pull ptonlix/gohumanloop-feishu:latest
 ```
 
 - 运行容器
 
 ```
 docker run -d \
-  --name gohumanloop-wework \
+  --name gohumanloop-feishu \
   -v /path/to/local/conf:/app/conf \
   -v /path/to/local/data:/app/data \
   -p 9800:9800 \
-  ptonlix/gohumanloop-wework:latest
+  ptonlix/gohumanloop-feishu:latest
 ```
 
 #### 配置反向代理
@@ -185,15 +185,15 @@ location ^~ /api/v1/apikey/ {
 
 <div align="center">
 	<img height=240 src="http://cdn.oyster-iot.cloud/202506252306729.png"><br>
-    <b face="雅黑">GoHumanLoop与Gohumanloop-Wework架构关系</b>
+    <b face="雅黑">GoHumanLoop与gohumanloop-feishu架构关系</b>
 </div>
 
 - `GoHumanLoop`提供了一套统一的 API 接口，通过`API Provider`对外提供。
-- `gohumanloop-wework`实现了`API Consumer`的功能，通过`API Provider`来获取审批相关的信息，并且通过企业微信 WeWork API 实现了与用户的企业微信应用进行交互，发送审批请求和获取审批事件回调等。
+- `gohumanloop-feishu`实现了`API Consumer`的功能，通过`API Provider`来获取审批相关的信息，并且通过企业微信 WeWork API 实现了与用户的企业微信应用进行交互，发送审批请求和获取审批事件回调等。
 
 ### 实现介绍
 
-`gohumanloop-wework`采用[Beego](https://github.com/beego/beego)作为 Web 框架。`sqlite`作为简单的数据存储。[go-workwx](https://github.com/xen0n/go-workwx)作为企业微信 API 实现。提供一个可拓展的 GoHumanLoop 企业微信审批示例服务。
+`gohumanloop-feishu`采用[Beego](https://github.com/beego/beego)作为 Web 框架。`sqlite`作为简单的数据存储。[go-workwx](https://github.com/xen0n/go-workwx)作为企业微信 API 实现。提供一个可拓展的 GoHumanLoop 企业微信审批示例服务。
 
 - 访问 Swagger 文档:
 
@@ -217,4 +217,4 @@ GoHumanLoop Wework 和文档均开源，我们欢迎以问题、文档和 PR 等
 
 ## 🌟 Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=gohumanloop-wework&type=Date)](https://www.star-history.com/#gohumanloop-wework&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=gohumanloop-feishu&type=Date)](https://www.star-history.com/#gohumanloop-feishu&Date)

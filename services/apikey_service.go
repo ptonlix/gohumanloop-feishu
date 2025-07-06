@@ -6,8 +6,8 @@ import (
 
 	"github.com/beego/beego/orm"
 	"github.com/google/uuid"
-	"github.com/ptonlix/gohumanloop-wework/init/sqlite"
-	"github.com/ptonlix/gohumanloop-wework/models"
+	"github.com/ptonlix/gohumanloop-feishu/init/sqlite"
+	"github.com/ptonlix/gohumanloop-feishu/models"
 )
 
 type APIKeyService struct {

@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ptonlix/gohumanloop-wework/models"
+	"github.com/ptonlix/gohumanloop-feishu/models"
 	"github.com/stretchr/testify/assert"
 )
 

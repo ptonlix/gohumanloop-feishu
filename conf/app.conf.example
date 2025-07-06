@@ -1,4 +1,4 @@
-appname = gohumanloop-wework
+appname = gohumanloop-feishu
 httpport = 9800
 runmode = dev
 autorender = false

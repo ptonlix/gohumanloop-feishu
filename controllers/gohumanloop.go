@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 
 	beego "github.com/beego/beego/v2/server/web"
-	"github.com/ptonlix/gohumanloop-wework/models"
-	"github.com/ptonlix/gohumanloop-wework/services"
+	"github.com/ptonlix/gohumanloop-feishu/models"
+	"github.com/ptonlix/gohumanloop-feishu/services"
 
 	"github.com/beego/beego/v2/core/logs"
 )
@@ -28,7 +28,7 @@ func (c *GoHumanLoopController) Request() {
 	logs.Info("incoming message: %s\n", ob)
 
 	// 发送给服务处理
-	spNo, err := services.GHLWeWorkService.HumanLoopRequestOA(ob)
+	spNo, err := services.GHLFeishuService.HumanLoopRequestOA(ob)
 	if err != nil {
 		logs.Error("HumanLoopRequestOA failed: %v", err)
 		c.Data["json"] = models.APIResponse{

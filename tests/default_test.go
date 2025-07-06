@@ -7,7 +7,7 @@ import (
 	"runtime"
 	"testing"
 
-	_ "github.com/ptonlix/gohumanloop-wework/routers"
+	_ "github.com/ptonlix/gohumanloop-feishu/routers"
 
 	"github.com/beego/beego/v2/core/logs"
 	beego "github.com/beego/beego/v2/server/web"

@@ -1,15 +1,15 @@
 package main
 
 import (
-	_ "github.com/ptonlix/gohumanloop-wework/init/wework"
+	_ "github.com/ptonlix/gohumanloop-feishu/init/feishu"
 
-	_ "github.com/ptonlix/gohumanloop-wework/routers"
+	_ "github.com/ptonlix/gohumanloop-feishu/routers"
 
 	"github.com/beego/beego/v2/core/logs"
 
 	beego "github.com/beego/beego/v2/server/web"
 
-	_ "github.com/ptonlix/gohumanloop-wework/docs"
+	_ "github.com/ptonlix/gohumanloop-feishu/docs"
 )
 
 var (
@@ -26,17 +26,17 @@ func init() {
 	logs.SetLogger(logs.AdapterFile, `{"filename":"./log/project.log","level":7,"maxlines":0,"maxsize":0,"daily":true,"maxdays":10,"color":true}`)
 }
 
-// @title           GoHumanLoop-Wework
+// @title           gohumanloop-feishu
 // @version         v0.1.0
 // @description     针对GoHumanLoop在企业微信场景下进行审批、获取信息操作的示例服务。方便用户在使用`GohumanLoop`时，对接到自己的企业微信环境中。
 // @termsOfService  http://swagger.io/terms/
 
 // @contact.name   Baird
-// @contact.url    https://github.com/ptonlix/gohumanloop-wework
+// @contact.url    https://github.com/ptonlix/gohumanloop-feishu
 // @contact.email  baird0917@163.com
 
 // @license.name  MIT
-// @license.url   https://github.com/ptonlix/gohumanloop-wework/blob/main/LICENSE
+// @license.url   https://github.com/ptonlix/gohumanloop-feishu/blob/main/LICENSE
 
 // @host      127.0.0.1:9800
 // @BasePath  /api/v1

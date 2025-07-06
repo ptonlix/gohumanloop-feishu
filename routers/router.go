@@ -1,5 +1,5 @@
 // @APIVersion 0.1.0
-// @Title GoHumanLoop-Wework
+// @Title gohumanloop-feishu
 // @Description 是针对GoHumanLoop在企业微信场景下进行审批、获取信息操作的示例服务。方便用户在使用`GohumanLoop`时，对接到自己的企业微信环境中。
 // @Contact baird0917@163.com
 // @License MIT
@@ -9,9 +9,10 @@ import (
 	"github.com/beego/beego/logs"
 	beego "github.com/beego/beego/v2/server/web"
 	"github.com/beego/beego/v2/server/web/context"
-	"github.com/ptonlix/gohumanloop-wework/controllers"
-	"github.com/ptonlix/gohumanloop-wework/models"
-	"github.com/ptonlix/gohumanloop-wework/services"
+	"github.com/ptonlix/gohumanloop-feishu/controllers"
+	"github.com/ptonlix/gohumanloop-feishu/init/feishu"
+	"github.com/ptonlix/gohumanloop-feishu/models"
+	"github.com/ptonlix/gohumanloop-feishu/services"
 )
 
 func BearerTokenAuth(ctx *context.Context) {
@@ -39,9 +40,6 @@ func BearerTokenAuth(ctx *context.Context) {
 }
 
 func init() {
-	drc := &controllers.WeWorkController{}
-	hl, _ := drc.NewHttpHandler()
-	beego.Handler("/gohumanloop/callback", hl)
 
 	nsGoHumanLoop := beego.NewNamespace("/api/v1",
 		beego.NSBefore(func(ctx *context.Context) {
@@ -70,4 +68,13 @@ func init() {
 	)
 
 	beego.AddNamespace(nsGoHumanLoop)
+
+	// 订阅审批事件
+	services.GHLFeishuService.SubscribeApprovalEvent(feishu.FeishuConf.ApproveTemplateId)
+	services.GHLFeishuService.SubscribeApprovalEvent(feishu.FeishuConf.InfoTemplateId)
+	// 初始化飞书控制器
+	FeishuInstance := controllers.NewFeishuController()
+	// 启动WebSocket长连接
+	FeishuInstance.StartWebSocket()
+	logs.Info("飞书WebSocket服务已启动")
 }

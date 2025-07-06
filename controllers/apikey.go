@@ -6,9 +6,9 @@ import (
 
 	"github.com/beego/beego/v2/core/logs"
 	beego "github.com/beego/beego/v2/server/web"
-	"github.com/ptonlix/gohumanloop-wework/init/wework"
-	"github.com/ptonlix/gohumanloop-wework/models"
-	"github.com/ptonlix/gohumanloop-wework/services"
+	"github.com/ptonlix/gohumanloop-feishu/init/feishu"
+	"github.com/ptonlix/gohumanloop-feishu/models"
+	"github.com/ptonlix/gohumanloop-feishu/services"
 )
 
 // APIKeyController operations for API Keys
@@ -29,7 +29,7 @@ func (c *APIKeyController) CreateKey() {
 	logs.Info("incoming message: %s\n", ak)
 
 	// 校验参数是否正确
-	if ak.Agentid != strconv.Itoa(int(wework.WeworkConf.AgentId)) || ak.Corpsecret != wework.WeworkConf.CorpSecret {
+	if ak.AppId != feishu.FeishuConf.AppId || ak.AppSecret != feishu.FeishuConf.AppSecret {
 		c.Data["json"] = models.APIResponse{
 			Success: false,
 			Error:   "参数校验失败，生成API Key失败",

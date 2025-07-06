@@ -12,12 +12,12 @@ const docTemplate = `{
         "termsOfService": "http://swagger.io/terms/",
         "contact": {
             "name": "Baird",
-            "url": "https://github.com/ptonlix/gohumanloop-wework",
+            "url": "https://github.com/ptonlix/gohumanloop-feishu",
             "email": "baird0917@163.com"
         },
         "license": {
             "name": "MIT",
-            "url": "https://github.com/ptonlix/gohumanloop-wework/blob/main/LICENSE"
+            "url": "https://github.com/ptonlix/gohumanloop-feishu/blob/main/LICENSE"
         },
         "version": "{{.Version}}"
     },
@@ -722,7 +722,7 @@ var SwaggerInfo = &swag.Spec{
 	Host:             "127.0.0.1:9800",
 	BasePath:         "/api/v1",
 	Schemes:          []string{},
-	Title:            "GoHumanLoop-Wework",
+	Title:            "gohumanloop-feishu",
 	Description:      "针对GoHumanLoop在企业微信场景下进行审批、获取信息操作的示例服务。方便用户在使用`GohumanLoop`时，对接到自己的企业微信环境中。",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,

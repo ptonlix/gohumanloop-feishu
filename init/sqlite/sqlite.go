@@ -4,7 +4,7 @@ import (
 	"github.com/beego/beego/orm"
 	"github.com/beego/beego/v2/core/logs"
 	beego "github.com/beego/beego/v2/server/web"
-	"github.com/ptonlix/gohumanloop-wework/models"
+	"github.com/ptonlix/gohumanloop-feishu/models"
 )
 
 var Mydb orm.Ormer

@@ -4,8 +4,8 @@ import (
 	"time"
 
 	"github.com/beego/beego/orm"
-	"github.com/ptonlix/gohumanloop-wework/init/sqlite"
-	"github.com/ptonlix/gohumanloop-wework/models"
+	"github.com/ptonlix/gohumanloop-feishu/init/sqlite"
+	"github.com/ptonlix/gohumanloop-feishu/models"
 )
 
 type GoHumanloopService struct {

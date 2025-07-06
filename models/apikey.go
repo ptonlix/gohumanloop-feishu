@@ -2,9 +2,9 @@ package models
 
 // HumanLoopRequestData 人机协作请求数据
 type APIKeyRequestData struct {
-	Agentid    string `json:"agentid"`    // 企业微信应用ID
-	Corpsecret string `json:"corpsecret"` // 企业微信应用密钥
-	Name       string `json:"name"`       //密钥名称
+	AppId     string `json:"appid"`     // 企业微信应用ID
+	AppSecret string `json:"appsecret"` // 企业微信应用密钥
+	Name      string `json:"name"`      //密钥名称
 }
 
 type APIKeyResponseData struct {

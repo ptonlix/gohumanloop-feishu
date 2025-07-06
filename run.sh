@@ -13,4 +13,4 @@ fi
 cd "$script_dir" || exit
 
 # 执行可执行程序
-./gohumanloop-wework
+./gohumanloop-feishu
