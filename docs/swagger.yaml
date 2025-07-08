@@ -19,7 +19,7 @@ definitions:
     properties:
       api_keys:
         items:
-          $ref: "#/definitions/models.APIKey"
+          $ref: '#/definitions/models.APIKey'
         type: array
       error:
         description: 错误信息（可选）
@@ -30,10 +30,10 @@ definitions:
     type: object
   models.APIKeyRequestData:
     properties:
-      agentid:
+      appid:
         description: 企业微信应用ID
         type: string
-      corpsecret:
+      appsecret:
         description: 企业微信应用密钥
         type: string
       name:
@@ -180,192 +180,192 @@ paths:
     post:
       description: Continue a HumanLoop conversation (not supported)
       parameters:
-        - description: body for continuing HumanLoop
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: "#/definitions/models.HumanLoopContinueData"
+      - description: body for continuing HumanLoop
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.HumanLoopContinueData'
       responses:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/models.APIResponse"
+            $ref: '#/definitions/models.APIResponse'
         "400":
           description: Bad Request
           schema:
-            $ref: "#/definitions/models.APIResponse"
+            $ref: '#/definitions/models.APIResponse'
       security:
-        - ApiKeyAuth: []
+      - ApiKeyAuth: []
       tags:
-        - HumanLoop
+      - HumanLoop
   /api/v1/humanloop/request:
     post:
       description: Create a new HumanLoop request
       parameters:
-        - description: body for HumanLoop request
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: "#/definitions/models.HumanLoopRequestData"
+      - description: body for HumanLoop request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.HumanLoopRequestData'
       responses:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/models.APIResponse"
+            $ref: '#/definitions/models.APIResponse'
         "400":
           description: Bad Request
           schema:
-            $ref: "#/definitions/models.APIResponse"
+            $ref: '#/definitions/models.APIResponse'
       security:
-        - ApiKeyAuth: []
+      - ApiKeyAuth: []
       tags:
-        - HumanLoop
+      - HumanLoop
   /api/v1/humanloop/status:
     get:
       description: Get the status of a HumanLoop request
       parameters:
-        - description: Conversation ID
-          in: query
-          name: conversation_id
-          required: true
-          type: string
-        - description: Request ID
-          in: query
-          name: request_id
-          required: true
-          type: string
-        - description: Platform
-          in: query
-          name: platform
-          required: true
-          type: string
+      - description: Conversation ID
+        in: query
+        name: conversation_id
+        required: true
+        type: string
+      - description: Request ID
+        in: query
+        name: request_id
+        required: true
+        type: string
+      - description: Platform
+        in: query
+        name: platform
+        required: true
+        type: string
       responses:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/models.HumanLoopStatusResponse"
+            $ref: '#/definitions/models.HumanLoopStatusResponse'
         "400":
           description: Bad Request
           schema:
-            $ref: "#/definitions/models.APIResponse"
+            $ref: '#/definitions/models.APIResponse'
       security:
-        - ApiKeyAuth: []
+      - ApiKeyAuth: []
       tags:
-        - HumanLoop
+      - HumanLoop
   /apikey/create:
     post:
       description: Create a new API Key
       parameters:
-        - description: API Key creation data
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: "#/definitions/models.APIKeyRequestData"
+      - description: API Key creation data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.APIKeyRequestData'
       responses:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/models.APIKeyResponseData"
+            $ref: '#/definitions/models.APIKeyResponseData'
         "400":
           description: Bad Request
           schema:
-            $ref: "#/definitions/models.APIResponse"
+            $ref: '#/definitions/models.APIResponse'
       tags:
-        - APIKey
+      - APIKey
   /apikey/delete:
     post:
       description: Delete an API Key
       parameters:
-        - description: API Key to delete
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: "#/definitions/models.APIKey"
+      - description: API Key to delete
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.APIKey'
       responses:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/models.APIResponse"
+            $ref: '#/definitions/models.APIResponse'
         "400":
           description: Bad Request
           schema:
-            $ref: "#/definitions/models.APIResponse"
+            $ref: '#/definitions/models.APIResponse'
       security:
-        - ApiKeyAuth: []
+      - ApiKeyAuth: []
       tags:
-        - APIKey
+      - APIKey
   /apikey/disable:
     post:
       description: Disable an enabled API Key
       parameters:
-        - description: API Key to disable
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: "#/definitions/models.APIKey"
+      - description: API Key to disable
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.APIKey'
       responses:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/models.APIResponse"
+            $ref: '#/definitions/models.APIResponse'
         "400":
           description: Bad Request
           schema:
-            $ref: "#/definitions/models.APIResponse"
+            $ref: '#/definitions/models.APIResponse'
       security:
-        - ApiKeyAuth: []
+      - ApiKeyAuth: []
       tags:
-        - APIKey
+      - APIKey
   /apikey/enable:
     post:
       description: Enable a disabled API Key
       parameters:
-        - description: API Key to enable
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: "#/definitions/models.APIKey"
+      - description: API Key to enable
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.APIKey'
       responses:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/models.APIResponse"
+            $ref: '#/definitions/models.APIResponse'
         "400":
           description: Bad Request
           schema:
-            $ref: "#/definitions/models.APIResponse"
+            $ref: '#/definitions/models.APIResponse'
       security:
-        - ApiKeyAuth: []
+      - ApiKeyAuth: []
       tags:
-        - APIKey
+      - APIKey
   /apikey/get:
     get:
       description: Get API Key details by actual key value
       parameters:
-        - description: The API key value
-          in: query
-          name: key
-          required: true
-          type: string
+      - description: The API key value
+        in: query
+        name: key
+        required: true
+        type: string
       responses:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/models.APIKeyResponseData"
+            $ref: '#/definitions/models.APIKeyResponseData'
         "400":
           description: Bad Request
           schema:
-            $ref: "#/definitions/models.APIResponse"
+            $ref: '#/definitions/models.APIResponse'
       security:
-        - ApiKeyAuth: []
+      - ApiKeyAuth: []
       tags:
-        - APIKey
+      - APIKey
   /apikey/list:
     get:
       description: Get all API Keys
@@ -373,84 +373,84 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/models.APIKeyListResponse"
+            $ref: '#/definitions/models.APIKeyListResponse'
         "400":
           description: Bad Request
           schema:
-            $ref: "#/definitions/models.APIResponse"
+            $ref: '#/definitions/models.APIResponse'
       security:
-        - ApiKeyAuth: []
+      - ApiKeyAuth: []
       tags:
-        - APIKey
+      - APIKey
   /apikey/update:
     post:
       description: Update an existing API Key
       parameters:
-        - description: API Key update data
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: "#/definitions/models.APIKey"
+      - description: API Key update data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.APIKey'
       responses:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/models.APIResponse"
+            $ref: '#/definitions/models.APIResponse'
         "400":
           description: Bad Request
           schema:
-            $ref: "#/definitions/models.APIResponse"
+            $ref: '#/definitions/models.APIResponse'
       security:
-        - ApiKeyAuth: []
+      - ApiKeyAuth: []
       tags:
-        - APIKey
+      - APIKey
   /humanloop/cancel:
     post:
       description: Cancel a specific HumanLoop request
       parameters:
-        - description: body for canceling HumanLoop
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: "#/definitions/models.HumanLoopCancelData"
+      - description: body for canceling HumanLoop
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.HumanLoopCancelData'
       responses:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/models.APIResponse"
+            $ref: '#/definitions/models.APIResponse'
         "400":
           description: Bad Request
           schema:
-            $ref: "#/definitions/models.APIResponse"
+            $ref: '#/definitions/models.APIResponse'
       security:
-        - ApiKeyAuth: []
+      - ApiKeyAuth: []
       tags:
-        - HumanLoop
+      - HumanLoop
   /humanloop/cancel_conversation:
     post:
       description: Cancel all HumanLoop requests in a conversation
       parameters:
-        - description: body for canceling conversation
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: "#/definitions/models.HumanLoopCancelConversationData"
+      - description: body for canceling conversation
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.HumanLoopCancelConversationData'
       responses:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/models.APIResponse"
+            $ref: '#/definitions/models.APIResponse'
         "400":
           description: Bad Request
           schema:
-            $ref: "#/definitions/models.APIResponse"
+            $ref: '#/definitions/models.APIResponse'
       security:
-        - ApiKeyAuth: []
+      - ApiKeyAuth: []
       tags:
-        - HumanLoop
+      - HumanLoop
 securityDefinitions:
   ApiKeyAuth:
     in: header

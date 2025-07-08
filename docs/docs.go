@@ -521,11 +521,11 @@ const docTemplate = `{
         "models.APIKeyRequestData": {
             "type": "object",
             "properties": {
-                "agentid": {
+                "appid": {
                     "description": "企业微信应用ID",
                     "type": "string"
                 },
-                "corpsecret": {
+                "appsecret": {
                     "description": "企业微信应用密钥",
                     "type": "string"
                 },

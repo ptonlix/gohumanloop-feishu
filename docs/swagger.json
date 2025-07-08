@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "针对GoHumanLoop在企业微信场景下进行审批、获取信息操作的示例服务。方便用户在使用`GohumanLoop`时，对接到自己的企业微信环境中。",
+    "description": "针对`GoHumanLoop`在飞书场景下进行审批、获取信息等人机协同操作的示例服务。方便用户在使用`GohumanLoop`时，对接到自己的企业微信环境中",
     "title": "gohumanloop-feishu",
     "termsOfService": "http://swagger.io/terms/",
     "contact": {
@@ -491,11 +491,11 @@
     "models.APIKeyRequestData": {
       "type": "object",
       "properties": {
-        "agentid": {
+        "appid": {
           "description": "企业微信应用ID",
           "type": "string"
         },
-        "corpsecret": {
+        "appsecret": {
           "description": "企业微信应用密钥",
           "type": "string"
         },

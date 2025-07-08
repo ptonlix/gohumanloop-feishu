@@ -6,17 +6,14 @@ copyrequestbody = true
 EnableDocs = true
 
 # wework
-agentid = 1000003
-corpsecret = XXXXX
-corpid = XXXXX
-ptoken = XXXXX
-pkey = XXXXX
+appid = XXXXX # 企业应用ID
+appsecret = XXXXX # 应用Secret
 
 # template
-approve_template_id = 8TmoaR5xEaZsuzKyRT4Zt82FLYCYXVN5EVk6R
-info_template_id = 3WN63LowuwFRsDXft1GbiQi4NrYyLApeejYCBs3S
-creator_userid = ChenFuDong
-approver_userid = ChenFuDong
+approve_template_id = B102B40F-E288-4A48-8220-FB0E69990222
+info_template_id = 4B131588-A5E2-4CE6-91D1-5A208CA62EDA
+creator_userid = ou_ed1d616f3023f7781808ce479b5f0fdd
+approver_userid = ou_ed1d616f3023f7781808ce479b5f0fdd
 
 # database
 datapath = ./data/gohumanloop.db
