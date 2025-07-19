@@ -4,7 +4,7 @@
 	<img height=80 src="https://lf-package-cn.feishucdn.com/obj/feishu-static/lark/open/website/images/899fa60e60151c73aaea2e25871102dc.svg"><br>
 </div>
 
-**GoHumanLoop FeiShu** 是针对`GoHumanLoop`在飞书场景下进行审批、获取信息等人机协同操作的示例服务。方便用户在使用`GohumanLoop`时，对接到自己的企业微信环境中。
+**GoHumanLoop FeiShu** 是针对`GoHumanLoop`在飞书场景下进行审批、获取信息等人机协同操作的示例服务。方便用户在使用`GohumanLoop`时，对接到自己的飞书环境中。
 
 `GoHumanLoop` 项目地址：https://github.com/ptonlix/gohumanloop ✈️
 
